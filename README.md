@@ -2,12 +2,12 @@
 
 This is a basic benchmarking tool for timing Python callables.
 
-It's so basic, that probably you don't need it. But if you do, here it is. 
+It's so basic, that probably you don't need it. But if you do, here it is.
 No dependencies, just a simple wrapper around `timeit.Timer` and `time.perf_counter`.
 
 ## Installation
 
-> [!NOTE] 
+> [!NOTE]
 > Package is not yet published to pypi.org
 
 ```bash
