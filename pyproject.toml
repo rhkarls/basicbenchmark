@@ -1,0 +1,31 @@
+[project]
+name = "basicbenchmark"
+version = "0.1.0"
+description = "A very simple and basic benchmarking tool. Probably so basic, you don't even need it."
+readme = "README.md"
+authors = [
+    { name = "Reinert Huseby Karlsen", email = "rhkarls@proton.me" }
+]
+requires-python = ">=3.9"
+license = "MIT"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+]
