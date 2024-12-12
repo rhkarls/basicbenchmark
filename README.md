@@ -1,5 +1,9 @@
 # basicbenchmark
 
+[![PyPI - Version](https://img.shields.io/pypi/v/basicbenchmark.svg)](https://pypi.org/project/basicbenchmark)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/basicbenchmark.svg)](https://pypi.org/project/basicbenchmark)
+[![codecov](https://codecov.io/github/rhkarls/basicbenchmark/graph/badge.svg?token=69XQYRBK5I)](https://codecov.io/github/rhkarls/basicbenchmark)
+
 This is a basic benchmarking tool for timing Python callables.
 
 It's so basic, that probably you don't need it. But if you do, here it is.
