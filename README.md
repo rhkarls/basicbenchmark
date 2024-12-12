@@ -11,9 +11,6 @@ No dependencies, just a simple wrapper around `timeit.Timer` and `time.perf_coun
 
 ## Installation
 
-> [!NOTE]
-> Package is not yet published to pypi.org
-
 ```bash
 pip install basicbenchmark
 ```
