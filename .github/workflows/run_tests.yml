@@ -33,15 +33,15 @@ jobs:
           run: uv sync --all-extras --dev
 
         - name: Lint with Ruff
-          run: ruff check --output-format=github --target-version=py313
+          run: uv run ruff check --output-format=github --target-version=py313
           continue-on-error: true
 
         - name: Check code formatting with Ruff
-          run: ruff format --diff --target-version=py313
+          run: uv run ruff format --diff --target-version=py313
           continue-on-error: true
 
         - name: Test with pytest
-          run: pytest --cov-report=xml --cov=basicbenchmark tests/
+          run: uv run pytest --cov-report=xml --cov=basicbenchmark tests/
 
         - name: Upload coverage reports to Codecov
           uses: codecov/codecov-action@v5
