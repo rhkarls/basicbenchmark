@@ -1,4 +1,4 @@
-name: Run pytest and upload coverage
+name: tests and linting
 
 on:
   push:

@@ -2,6 +2,7 @@
 
 [![PyPI - Version](https://img.shields.io/pypi/v/basicbenchmark.svg)](https://pypi.org/project/basicbenchmark)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/basicbenchmark.svg)](https://pypi.org/project/basicbenchmark)
+[![tests and linting](https://github.com/rhkarls/basicbenchmark/actions/workflows/run_tests.yml/badge.svg)](https://github.com/rhkarls/basicbenchmark/actions/workflows/run_tests.yml)
 [![codecov](https://codecov.io/github/rhkarls/basicbenchmark/graph/badge.svg?token=69XQYRBK5I)](https://codecov.io/github/rhkarls/basicbenchmark)
 
 This is a basic benchmarking tool for timing Python callables.
