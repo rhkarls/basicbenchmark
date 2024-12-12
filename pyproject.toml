@@ -46,6 +46,7 @@ dev = [
   "pytest-cov>=6.0.0",
   "pytest>=8.3.4",
   "ruff>=0.8.2",
+  "interrogate>=1.7.0",
 ]
 
 [tool.numpydoc_validation]

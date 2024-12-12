@@ -34,7 +34,7 @@ repos:
     rev: 1.7.0
     hooks:
       - id: interrogate
-        exclude: ^(tests|docs)/.*
+        exclude: (__init__.py|tests/.*|docs/.*)
 
   - repo: https://github.com/tox-dev/pyproject-fmt
     rev: v2.4.3
