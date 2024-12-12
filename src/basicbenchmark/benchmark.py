@@ -11,7 +11,7 @@ Will output standard deviation of all runs, fastest single run and slowest singl
 import statistics
 import time
 import timeit
-from typing import Callable, Optional
+from typing import Callable, Optional, Union
 
 
 def benchmark(
@@ -83,7 +83,7 @@ def benchmark_stats(
     print_result: bool = True,
     n_runs: Optional[int] = None,
     pre_run: bool = False,
-) -> dict[str, Optional[int | float]]:
+) -> dict[str, Optional[Union[int, float]]]:
     """
     A simple time benchmark for a callable with basic statistics.
 
