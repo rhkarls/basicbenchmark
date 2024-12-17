@@ -5,10 +5,13 @@
 [![tests and linting](https://github.com/rhkarls/basicbenchmark/actions/workflows/run_tests.yml/badge.svg)](https://github.com/rhkarls/basicbenchmark/actions/workflows/run_tests.yml)
 [![codecov](https://codecov.io/github/rhkarls/basicbenchmark/graph/badge.svg?token=69XQYRBK5I)](https://codecov.io/github/rhkarls/basicbenchmark)
 
-This is a basic benchmarking tool for timing Python callables.
+basicbenchmark is a simple benchmarking tool for timing Python callables.
 
 It's so basic, that probably you don't need it. But if you do, here it is.
-No dependencies, just a simple wrapper around `timeit.Timer` and `time.perf_counter`.
+It runs a callable a number of times and returns the average time it took.
+Optionally, you can also get some basic statistics: fastest and slowest run time, and the standard deviation.
+
+No dependencies, just a simple wrapper around python standard library `timeit.Timer` and `time.perf_counter`.
 
 ## Installation
 
@@ -36,19 +39,31 @@ def my_function(x, y=2):
     return x**y
 ```
 
-Using auto ranging and passing arguments:
+The most basic way to time a function is to use the `benchmark` function, which uses auto ranging to decide the number
+of runs required (if argument `n_runs` is not passed), and allows for passing arguments and keyword arguments to the callable.
+The example below times the function `my_function` with `x=2` and `y=2`, and returns the average time to `avg_time`:
 ```python
 avg_time = benchmark(my_function, args=(2,))
-my_function: 5,000,000 runs, mean time per run: 72.37 ns.
 ```
+Result is printed to the console
 
-Calling the benchmark_stats with keyword arguments to pass to the callable, and a specific number of runs:
+``` my_function: 5,000,000 runs, mean time per run: 72.37 ns. ```
+
+To also get some basic statistics, use the `benchmark_stats` function. This function does not support automatically determining the number of runs, so you need to specify the number of runs yourself.
+The example below uses the `benchmark_stats` with keyword arguments to pass to the callable:
+
 ```python
 timing_stats = benchmark_stats(my_function, kwargs={'x': 100, 'y': 3}, n_runs=100_000)
-my_function: 100,000 runs, mean time per run: 153.15±544.66 ns.
-Fastest run: 99.99 ns. Slowest run: 130400.00 ns.
+```
 
+It returns the following dictionary:
+```python
 timing_stats
 {'mean': 1.5315201089833864e-07, 'stdev': 5.44664144321298e-07, 'min': 9.998620953410864e-08, 'max': 0.00013040000339969993}
+```
 
+And prints to console:
+```
+my_function: 100,000 runs, mean time per run: 153.15±544.66 ns.
+Fastest run: 99.99 ns. Slowest run: 130400.00 ns.
 ```
