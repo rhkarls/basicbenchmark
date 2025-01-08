@@ -207,7 +207,7 @@ def _print_time_benchmark(
         max_print_time, _ = _seconds_to_display_time(
             max_time, force_unit=mean_time_unit
         )
-        min_max_print_str = f"\nFastest run: {min_print_time:.2f} {mean_time_unit}. Slowest run: {max_print_time:.2f} {mean_time_unit}."
+        min_max_print_str = f"\n\tFastest run: {min_print_time:.2f} {mean_time_unit}. Slowest run: {max_print_time:.2f} {mean_time_unit}."
     else:
         min_max_print_str = ""
 
