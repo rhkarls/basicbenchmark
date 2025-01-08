@@ -5,7 +5,7 @@ requires = [ "hatchling" ]
 
 [project]
 name = "basicbenchmark"
-version = "0.2.0-dev"
+version = "0.2.0-dev0"
 description = "A very simple and basic benchmarking tool for timing functions."
 readme = "README.md"
 license = "MIT"
