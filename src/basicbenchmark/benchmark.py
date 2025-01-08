@@ -11,12 +11,12 @@ Will output standard deviation of all runs, fastest single run and slowest singl
 import statistics
 import time
 import timeit
-from typing import Callable, Optional, Union
+from typing import Any, Callable, Optional
 
 
 def benchmark(
     func: Callable,
-    args: Optional[list] = None,
+    args: Optional[list | tuple] = None,
     kwargs: Optional[dict] = None,
     print_result: bool = True,
     n_runs: Optional[int] = None,
@@ -78,12 +78,12 @@ def benchmark(
 
 def benchmark_stats(
     func: Callable,
-    args: Optional[list] = None,
+    args: Optional[list | tuple] = None,
     kwargs: Optional[dict] = None,
     print_result: bool = True,
     n_runs: Optional[int] = None,
     pre_run: bool = False,
-) -> dict[str, Optional[Union[int, float]]]:
+) -> tuple[dict[str, float | None], Any]:
     """
     A simple time benchmark for a callable with basic statistics.
 
@@ -107,8 +107,11 @@ def benchmark_stats(
     dict
         A dictionary with the mean, standard deviation, minimum (fastest) and maximum (slowest) run
         times of `n_runs` calls of `func` in seconds.
+    any
+        The return value from the func Callable.
     """
 
+    return_value = None
     times = []
 
     if kwargs is None:
@@ -125,7 +128,7 @@ def benchmark_stats(
 
     for _ in range(n_runs):
         t_start = time.perf_counter()
-        func(*args, **kwargs)
+        return_value = func(*args, **kwargs)
         times.append(time.perf_counter() - t_start)
 
     mean_time = statistics.mean(times)
@@ -147,7 +150,12 @@ def benchmark_stats(
         )
         print(print_str)
 
-    return {"mean": mean_time, "stdev": stdev_time, "min": min_time, "max": max_time}
+    return {
+        "mean": mean_time,
+        "stdev": stdev_time,
+        "min": min_time,
+        "max": max_time,
+    }, return_value
 
 
 def _print_time_benchmark(
