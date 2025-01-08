@@ -1,27 +1,27 @@
-from basicbenchmark.decorators import benchmark_stats_me
+from basicbenchmark import basicbenchmark
 
 
-@benchmark_stats_me(n_runs=10)
+@basicbenchmark(n_runs=10)
 def dummy_func_no_args():
     pass
 
 
-@benchmark_stats_me(n_runs=10)
+@basicbenchmark(n_runs=10)
 def dummy_func_with_args(x, y):
     return x + y
 
 
-@benchmark_stats_me(n_runs=10)
+@basicbenchmark(n_runs=10)
 def dummy_func_with_kwargs(x, y=0):
     return x + y
 
 
-@benchmark_stats_me(pre_run=True, n_runs=10)
+@basicbenchmark(pre_run=True, n_runs=10)
 def dummy_func_with_pre_run():
     pass
 
 
-@benchmark_stats_me(n_runs=1)
+@basicbenchmark(n_runs=1)
 def dummy_func_with_autorange():
     pass
 

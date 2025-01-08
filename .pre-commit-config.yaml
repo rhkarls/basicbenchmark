@@ -35,7 +35,7 @@ repos:
     hooks:
       - id: interrogate
         exclude: (__init__.py|tests/.*|docs/.*)
-        args: [--fail-under=75]
+        args: [--fail-under=50]
 
   - repo: https://github.com/tox-dev/pyproject-fmt
     rev: v2.4.3

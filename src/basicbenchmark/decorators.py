@@ -8,7 +8,7 @@ from typing import Optional
 from basicbenchmark.benchmark import benchmark_stats
 
 
-def benchmark_stats_me(n_runs: Optional[int] = None, pre_run: bool = False):
+def basicbenchmark(n_runs: Optional[int] = None, pre_run: bool = False):
     """
     Decorator function for timing the execution of a callable, wraps benchmark_stats.
 
