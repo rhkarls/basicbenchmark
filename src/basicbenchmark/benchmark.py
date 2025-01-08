@@ -11,12 +11,12 @@ Will output standard deviation of all runs, fastest single run and slowest singl
 import statistics
 import time
 import timeit
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Optional, Union
 
 
 def benchmark(
     func: Callable,
-    args: Optional[list | tuple] = None,
+    args: Optional[Union[list, tuple]] = None,
     kwargs: Optional[dict] = None,
     print_result: bool = True,
     n_runs: Optional[int] = None,
@@ -78,12 +78,12 @@ def benchmark(
 
 def benchmark_stats(
     func: Callable,
-    args: Optional[list | tuple] = None,
+    args: Optional[Union[list, tuple]] = None,
     kwargs: Optional[dict] = None,
     print_result: bool = True,
     n_runs: Optional[int] = None,
     pre_run: bool = False,
-) -> tuple[dict[str, float | None], Any]:
+) -> tuple[dict[str, Union[float, None]], Any]:
     """
     A simple time benchmark for a callable with basic statistics.
 
