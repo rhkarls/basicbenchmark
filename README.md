@@ -7,11 +7,12 @@
 
 basicbenchmark is a simple benchmarking tool for timing Python callables.
 
-It's so basic, that probably you don't need it. But if you do, here it is.
+It's so basic, that probably you don't need it. But if it saves you a moment, here it is.
+
 It runs a callable a number of times and returns the average time it took.
 Optionally, you can also get some basic statistics: fastest and slowest run time, and the standard deviation.
 
-No dependencies, just a simple wrapper around python standard library `timeit.Timer` and `time.perf_counter`.
+No dependencies, just a simple wrapper around Python standard library `timeit.Timer` and `time.perf_counter`.
 
 ## Installation
 
@@ -21,16 +22,56 @@ pip install basicbenchmark
 
 ## Usage
 
-The package provides two functions: `benchmark` and `benchmark_stats`.
+The package provides a decorator function, `basicbenchmark`, that can be used to time functions each time they are called.
+
+In addition, there are two functions that can be called directly: `benchmark` and `benchmark_stats`.
+These are useful for timing functions, keeping timing benchmarks separate from source code and storing the results in variables.
+
+### Decorator
+
+Add the `@basicbenchmark` decorator to a function to time the execution and write the results to the console.
+
+```python
+from basicbenchmark import basicbenchmark
+
+@basicbenchmark
+def my_function(x, y=2):
+    return x**y
+
+result = my_function(x=2) # result is 4
+
+my_function: 1 runs, mean time per run: 2.50 µs.
+```
+
+You can specify the number of runs to perform by passing the `n_runs` argument to the decorator.
+It will in addition print the fastest and slowest run times, along with the standard deviation.
+
+```python
+@basicbenchmark(n_runs=100_000)
+def my_function(x, y=2):
+    return x**y
+
+result = my_function(x=2) # result is 4
+my_function: 100,000 runs, mean time per run: 385.44±700.90 ns.
+	Fastest run: 200.00 ns. Slowest run: 123700.00 ns.
+```
+
+You can also pass the `pre_run=True` argument to the decorator, which will run the function once before starting the benchmark.
+This is useful for correctly timing JIT compiled functions, for example.
+
+### Benchmarking functions
+The two functions that can be called directly, `benchmark` and `benchmark_stats`, are used to time a callable and return the timing results.
 
 The `benchmark` function takes a callable, optional arguments and keyword arguments, and runs it a number of times, returning only the average time it took to run the callable in seconds.
 It supports auto ranging the number of runs to get an accurate result, as it is a wrapper around `timeit.Timer`, or you can specify the number of runs yourself with the `n_runs` argument.
 
-The `benchmark_stats` function takes the same input arguments as `benchmark`, but instead return a dictionary with the average time, the standard deviation, the fastest and the slowest time in seconds.
+The `benchmark_stats` function takes the same input arguments as `benchmark`, but instead return a dictionary with timing results and the function return value.
+The result dictionary contains the average time, the standard deviation, the fastest and the slowest time in seconds.
 This is useful if you want to know more about the distribution of the times it took to run the callable, and not just the average. In some cases the fastest time is of more interest than the average.
 
 Both functions print the results to the console in more readable time units, but this can be disabled by setting the `print_result` argument to `False`.
 Both functions also support a `pre_run` argument, which runs the callable once before performing the benchmark. Useful for example when calling JIT compiled functions.
+
 
 ```python
 from basicbenchmark import benchmark, benchmark_stats
