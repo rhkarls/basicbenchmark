@@ -35,13 +35,9 @@ def basicbenchmark(n_runs: Optional[int] = None, pre_run: bool = False):
 
         return wrapper
 
-    # when called without parentheses, __call__ will be the function to decorate
-    def __call__(func):  # numpydoc ignore=GL08
-        return decorator(func)
-
-    if callable(n_runs):
-        f = n_runs  # when called without parentheses, n_runs will be the function
-        n_runs = None  # Reset n_runs to default
+    if callable(n_runs):  # when called without parentheses, n_runs will be the function
+        f = n_runs
+        n_runs = None  # reset n_runs to default in this case
         return decorator(f)
 
     # when called with parentheses return the decorator itself
