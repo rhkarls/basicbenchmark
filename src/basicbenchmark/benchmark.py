@@ -83,7 +83,7 @@ def benchmark_stats(
     print_result: bool = True,
     n_runs: Optional[int] = None,
     pre_run: bool = False,
-) -> tuple[dict[str, Union[float, None]], Any]:
+) -> dict[str, float | None | Any]:
     """
     A simple time benchmark for a callable with basic statistics.
 
@@ -105,10 +105,12 @@ def benchmark_stats(
     Returns
     -------
     dict
-        A dictionary with the mean, standard deviation, minimum (fastest) and maximum (slowest) run
-        times of `n_runs` calls of `func` in seconds.
-    any
-        The return value from the func Callable.
+        A dictionary with the following keys:
+            - return_value: the callable return value.
+            - mean: the average time of `n_runs` calls of `func` in seconds.
+            - stdev: standard deviation time of `n_runs` calls of `func` in seconds.
+            - min: minimum (fastest) time of all `n_runs` calls of `func` in seconds.
+            - max: maximum (slowest) time of all `n_runs` calls of `func` in seconds.
     """
 
     return_value = None
@@ -151,11 +153,12 @@ def benchmark_stats(
         print(print_str)
 
     return {
+        "return_value": return_value,
         "mean": mean_time,
         "stdev": stdev_time,
         "min": min_time,
         "max": max_time,
-    }, return_value
+    }
 
 
 def _print_time_benchmark(

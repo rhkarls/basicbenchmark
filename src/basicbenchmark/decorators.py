@@ -28,10 +28,10 @@ def basicbenchmark(n_runs: Optional[int] = None, pre_run: bool = False):
     def decorator(func):  # numpydoc ignore=GL08
         @wraps(func)
         def wrapper(*args, **kwargs):  # numpydoc ignore=GL08
-            _, return_value = benchmark_stats(
+            result = benchmark_stats(
                 func, args=args, kwargs=kwargs, n_runs=n_runs, pre_run=pre_run
             )
-            return return_value
+            return result["return_value"]
 
         return wrapper
 
