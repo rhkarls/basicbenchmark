@@ -10,7 +10,7 @@ from basicbenchmark.benchmark import benchmark_stats
 
 def basicbenchmark(n_runs: Optional[int] = None, pre_run: bool = False):
     """
-    Decorator function for timing the execution of a callable, wraps benchmark_stats.
+    Decorator function for timing the execution of a callable.
 
     Parameters
     ----------
@@ -35,4 +35,14 @@ def basicbenchmark(n_runs: Optional[int] = None, pre_run: bool = False):
 
         return wrapper
 
+    # when called without parentheses, __call__ will be the function to decorate
+    def __call__(func):  # numpydoc ignore=GL08
+        return decorator(func)
+
+    if callable(n_runs):
+        f = n_runs  # when called without parentheses, n_runs will be the function
+        n_runs = None  # Reset n_runs to default
+        return decorator(f)
+
+    # when called with parentheses return the decorator itself
     return decorator
