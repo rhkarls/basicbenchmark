@@ -83,7 +83,7 @@ def benchmark_stats(
     print_result: bool = True,
     n_runs: Optional[int] = None,
     pre_run: bool = False,
-) -> dict[str, float | None | Any]:
+) -> dict[str, Union[float, None, Any]]:
     """
     A simple time benchmark for a callable with basic statistics.
 
