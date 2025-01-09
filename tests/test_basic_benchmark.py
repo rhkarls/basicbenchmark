@@ -1,6 +1,6 @@
 import pytest
 
-from basicbenchmark.benchmark import benchmark
+from basicbenchmark import benchmark
 
 
 def test_basic_benchmark_with_no_args():

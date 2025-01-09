@@ -11,12 +11,12 @@ Will output standard deviation of all runs, fastest single run and slowest singl
 import statistics
 import time
 import timeit
-from typing import Callable, Optional, Union
+from typing import Any, Callable, Optional, Union
 
 
 def benchmark(
     func: Callable,
-    args: Optional[list] = None,
+    args: Optional[Union[list, tuple]] = None,
     kwargs: Optional[dict] = None,
     print_result: bool = True,
     n_runs: Optional[int] = None,
@@ -78,12 +78,12 @@ def benchmark(
 
 def benchmark_stats(
     func: Callable,
-    args: Optional[list] = None,
+    args: Optional[Union[list, tuple]] = None,
     kwargs: Optional[dict] = None,
     print_result: bool = True,
     n_runs: Optional[int] = None,
     pre_run: bool = False,
-) -> dict[str, Optional[Union[int, float]]]:
+) -> dict[str, Union[float, None, Any]]:
     """
     A simple time benchmark for a callable with basic statistics.
 
@@ -105,10 +105,15 @@ def benchmark_stats(
     Returns
     -------
     dict
-        A dictionary with the mean, standard deviation, minimum (fastest) and maximum (slowest) run
-        times of `n_runs` calls of `func` in seconds.
+        A dictionary with the following keys:
+            - return_value: the callable return value.
+            - mean: the average time of `n_runs` calls of `func` in seconds.
+            - stdev: standard deviation time of `n_runs` calls of `func` in seconds.
+            - min: minimum (fastest) time of all `n_runs` calls of `func` in seconds.
+            - max: maximum (slowest) time of all `n_runs` calls of `func` in seconds.
     """
 
+    return_value = None
     times = []
 
     if kwargs is None:
@@ -125,7 +130,7 @@ def benchmark_stats(
 
     for _ in range(n_runs):
         t_start = time.perf_counter()
-        func(*args, **kwargs)
+        return_value = func(*args, **kwargs)
         times.append(time.perf_counter() - t_start)
 
     mean_time = statistics.mean(times)
@@ -147,7 +152,13 @@ def benchmark_stats(
         )
         print(print_str)
 
-    return {"mean": mean_time, "stdev": stdev_time, "min": min_time, "max": max_time}
+    return {
+        "return_value": return_value,
+        "mean": mean_time,
+        "stdev": stdev_time,
+        "min": min_time,
+        "max": max_time,
+    }
 
 
 def _print_time_benchmark(
@@ -199,7 +210,7 @@ def _print_time_benchmark(
         max_print_time, _ = _seconds_to_display_time(
             max_time, force_unit=mean_time_unit
         )
-        min_max_print_str = f"\nFastest run: {min_print_time:.2f} {mean_time_unit}. Slowest run: {max_print_time:.2f} {mean_time_unit}."
+        min_max_print_str = f"\n\tFastest run: {min_print_time:.2f} {mean_time_unit}. Slowest run: {max_print_time:.2f} {mean_time_unit}."
     else:
         min_max_print_str = ""
 

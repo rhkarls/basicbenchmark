@@ -1,6 +1,6 @@
 import pytest
 
-from basicbenchmark.benchmark import benchmark_stats
+from basicbenchmark import benchmark_stats
 
 
 def test_basic_benchmark_stats_with_no_args():
@@ -23,6 +23,9 @@ def test_basic_benchmark_stats_with_args():
         return x + y
 
     result = benchmark_stats(dummy_func, args=(1, 2), n_runs=10)
+
+    assert result["return_value"] == 3
+
     assert isinstance(result["mean"], (int, float))
     assert isinstance(result["stdev"], (int, float))
     assert isinstance(result["min"], (int, float))
@@ -38,6 +41,9 @@ def test_basic_benchmark_stats_with_kwargs():
         return x + y
 
     result = benchmark_stats(dummy_func, kwargs={"x": 2}, n_runs=10)
+
+    assert result["return_value"] == 2
+
     assert isinstance(result["mean"], (int, float))
     assert isinstance(result["stdev"], (int, float))
     assert isinstance(result["min"], (int, float))

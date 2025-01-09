@@ -5,7 +5,7 @@ requires = [ "hatchling" ]
 
 [project]
 name = "basicbenchmark"
-version = "0.2.0-dev"
+version = "0.2.0"
 description = "A very simple and basic benchmarking tool for timing functions."
 readme = "README.md"
 license = "MIT"
@@ -62,3 +62,18 @@ exclude = [ # don't report on checks for these
   '\\.__repr__$',
   '\\.__str__$',
 ]
+
+[tool.interrogate]
+ignore-init-method = false
+ignore-init-module = true
+ignore-magic = false
+ignore-semiprivate = false
+ignore-private = false
+ignore-property-decorators = false
+ignore-module = false
+ignore-nested-functions = true
+ignore-nested-classes = false
+ignore-setters = false
+ignore-overloaded-functions = false
+fail-under = 80
+exclude = [ "tests" ]
