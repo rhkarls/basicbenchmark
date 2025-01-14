@@ -5,10 +5,13 @@ requires = [ "hatchling" ]
 
 [project]
 name = "basicbenchmark"
-version = "0.2.0"
+version = "0.3.0-dev0"
 description = "A very simple and basic benchmarking tool for timing functions."
 readme = "README.md"
 license = "MIT"
+maintainers = [
+  { name = "Reinert Huseby Karlsen", email = "rhkarls@proton.me" },
+]
 authors = [
   { name = "Reinert Huseby Karlsen", email = "rhkarls@proton.me" },
 ]
@@ -26,6 +29,11 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 dependencies = [  ]
+
+urls.Changelog = "https://github.com/rhkarls/basicbenchmark/blob/main/CHANGELOG.md"
+urls.Documentation = "https://github.com/rhkarls/basicbenchmark/blob/main/README.md"
+urls.Homepage = "https://github.com/rhkarls/basicbenchmark"
+urls.Issues = "https://github.com/rhkarls/basicbenchmark/issues"
 
 [tool.ruff]
 line-length = 88
